@@ -1,0 +1,80 @@
+
+body, html {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  overflow-y: auto;
+}
+
+html {
+  overflow-y: scroll;
+}
+/*
+div {
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    flex: 1 0 100%;
+}
+*/
+
+#chatApp {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 100%;
+    overflow-y: scroll;
+    padding-bottom: 35px;
+    margin: 0px auto;
+    width: 70%;
+    float: right;
+}
+
+#videoChat {
+  position: fixed;
+  display: flex;
+  flex-direction:column;
+  flex: 1 0 100%;
+  overflow-x: none;
+
+  margin: 0 0 0 0;
+  padding: 0;
+  width: 28%;
+  float:left;
+}
+
+#logo {
+  color: #FF00FF;
+  text-shadow: 2px 2px #00FFFF;  
+  margin: 0px 0px 0px 0px;
+  border: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  max-height: 25px;
+}
+
+canvas {
+  z-index: -1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+div.chatmsg:hover {
+  opacity: 1.0;
+}
+
+.disableScrollbars::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Chrome/Safari/Webkit */
+}
+
+video {
+    display: block;
+    line-height: 0;
+    max-height: 450px;
+}
+
+img {
+    max-width: 1280px;
+    max-height:720px;
+}

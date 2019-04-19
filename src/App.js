@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   socketConnection(stream) {
-    var socket = socketIOClient.connect("https://localhost");
+    var socket = socketIOClient.connect("https://vaporwaveom.herokuapp.com/");
     console.log("Connecting to server...");
 
     socket.on('peer', (data) => {

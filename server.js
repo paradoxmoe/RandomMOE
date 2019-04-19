@@ -1,14 +1,15 @@
 //npm run build on reacttest folder
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const express = require('express');
 const app = express();
 const fs = require('fs');
-var https = require('https');
+//var https = require('https');
 var http = require('http');
 //const server = require('http').createServer(app);
 
+/*
 var options = {
     key: fs.readFileSync('./invalidCerts/96461604_192.168.1.43.key'),
     cert: fs.readFileSync('./invalidCerts/96461604_192.168.1.43.cert'),
@@ -16,14 +17,15 @@ var options = {
     requestCert: false
 
     }
+*/
 
-var server = https.createServer(options, app);
-var serverUnsecure = http.createServer(app)
+var server = http.createServer(options, app);
+//var serverUnsecure = http.createServer(app)
 
 const io = require('socket.io')(server);
 const path = require('path');
 
-var port = 8080;
+var port = 80;
 
 var queue = [];
 
@@ -31,7 +33,7 @@ app.use(function (req, res, next) {
   if(req.secure) {
     next()
   } else {
-    res.redirect("https://" + req.headers.host + ":8080" + req.url );
+    res.redirect("https://" + req.headers.host + ":80" + req.url );
   }
 })
 
@@ -53,7 +55,7 @@ function redirectSec(req, res, next) {
 */
 
 server.listen(port);
-serverUnsecure.listen(80);
+//serverUnsecure.listen(80);
 
 io.on('connection', (socket) => {
   console.log("User Connected");

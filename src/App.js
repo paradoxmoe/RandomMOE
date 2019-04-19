@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   socketConnection(stream) {
-    var socket = socketIOClient.connect("https://localhost:8080", {rejectUnauthorized: false});
+    var socket = socketIOClient.connect("https://localhost");
     console.log("Connecting to server...");
 
     socket.on('peer', (data) => {

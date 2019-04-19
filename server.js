@@ -28,7 +28,7 @@ const path = require('path');
 var port = process.env.PORT || 5000;
 
 var queue = [];
-/*
+
 app.use(function (req, res, next) {
   if(req.secure) {
     next()
@@ -36,7 +36,7 @@ app.use(function (req, res, next) {
     res.redirect("https://" + req.headers.host + ":80" + req.url );
   }
 })
-*/
+
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', function(req, res) {

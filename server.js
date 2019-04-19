@@ -30,7 +30,7 @@ var port = process.env.PORT || 5000;
 var queue = [];
 
 app.use(function (req, res, next) {
-  if(req.secure) {
+  if(req.secure || req.header('x-forwarded-proto') == 'https') {
     next()
   } else {
     res.redirect("https://" + req.headers.host + req.url );

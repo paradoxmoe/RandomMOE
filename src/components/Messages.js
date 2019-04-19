@@ -41,8 +41,14 @@ class Messages extends Component {
             } else {
                 return null
             }
-        } else if(splitContent[2]) {
-
+        } else if((splitContent[3] === "www.youtube.com" || splitContent[3] === "youtube.com" || splitContent[3] === "youtu.be" || splitContent[3] === "www.youtu.be")) {            
+            const regexp = /^.*(watch\?v=)/;
+            
+            var youtubeURL = "https://youtube.com/embed/" + splitContent[4].replace(regexp, '');
+            return (
+                
+                <div><iframe width="560" height="315" src={{youtubeURL}} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            )
         } else {
             return null
         }

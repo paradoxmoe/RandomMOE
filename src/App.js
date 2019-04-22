@@ -142,6 +142,7 @@ class App extends Component {
 
         <GenerateKeys />
         <CanvasBackground />
+        <div id='contact'><a href="https://twitter.com/Twitch_NotDem">Twitter</a> | <a href="https://twitch.tv/notdem">Twitch</a> | <a href="https://github.com/verysimplyms/omreact">Github Repo</a></a></div>
       </div>
     );
   }

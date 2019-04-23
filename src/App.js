@@ -166,11 +166,11 @@ class App extends Component {
 
       let options = {
         message: content,
-        publicKeys: openpgp.key.readArmored(this.state.peerPublicKey).keys,
+        publicKeys: openpgp.key.readArmored(this.state.peerPublicKey).keys[0],
       }
 
       openpgp.encrypt(options).then( (ciphertext) => {
-        this.state.peer.send(JSON.stringify({user: 'Anon', message: ciphertext.content}));
+        this.state.peer.send(JSON.stringify({user: 'Anon', message: ciphertext}));
       });
 
       

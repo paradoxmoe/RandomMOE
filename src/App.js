@@ -2,14 +2,34 @@
 
 import React, { Component } from 'react';
 import Chat from './components/Chat';
-import GenerateKeys from './components/GenerateKeys';
 import CreateMessage from './components/CreateMessage';
 import CanvasBackground from './components/CanvasBackground';
-
+import * as openpgp from 'openpgp';
 import './App.css';
 import Peer from 'simple-peer'; 
 import socketIOClient from 'socket.io-client';
 import $ from 'jquery';
+
+
+openpgp.initWorker({path: './dist/openpgp.worker.min.js'}); 
+
+if(typeof localStorage.publicKey == 'undefined' || typeof localStorage.privateKey == 'undefined' || typeof localStorage.pass == 'undefined') {
+
+  var cryptoArray = new Uint32Array(4);
+  window.crypto.getRandomValues(cryptoArray);
+  localStorage.pass = cryptoArray[2].toString()
+  var options = {
+    userIds: [{name: cryptoArray[3].toString(), email: cryptoArray[0] + '@' + cryptoArray[1] + '.com' }],
+    numBits: 2048,
+    passphrase: localStorage.pass
+  }
+
+  openpgp.generateKey(options).then(function(key) {
+  localStorage.setItem('privateKey', key.privateKeyArmored);
+  localStorage.setItem('publicKey', key.publicKeyArmored);
+
+  })
+}
 
 class App extends Component {
   
@@ -87,17 +107,39 @@ class App extends Component {
   this.forceUpdate();
   
     peer.on("connect", () => {
-        console.log("Successfully connected to peer!");
+        peer.send(JSON.stringify({isPublicKey: true, peerPublicKey: localStorage.publicKey}))
+        console.log("Sent Public Key!");
     })
 
     peer.on("data", (data) => {
       data = JSON.parse(data);
-      const newMessage = {
-        id: this.state.chatMessages.length,
-        user: data.user,
-        message: data.message 
+
+      if(data.isPublicKey == true) {
+        this.setState({peerPublicKey: data.peerPublicKey});
+        console.log("Public Key Recieved!");
+      } else {
+
+        let privKey = openpgp.key.readArmored(localStorage.privateKey).keys[0];
+        privKey.decrypt(localStorage.pass);
+
+        let options = {
+          message: data.message,
+          privateKey: privKey
+        }
+
+        openpgp.decrypt(options).then( (plaintext) => {
+          let newMessage = {
+            id: this.state.chatMessages.length,
+            user: data.user,
+            message: plaintext 
+          }
+          this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
+        })
+
+
       }
-      this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
+
+
     });
 
     peer.on("stream", (data) => {
@@ -119,7 +161,17 @@ class App extends Component {
         message: content 
       }
       this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
-      this.state.peer.send(JSON.stringify({user: 'Anon', message: content}));
+
+      let options = {
+        message: content,
+        publicKeys: openpgp.key.readArmored(this.state.peerPublicKey).keys,
+      }
+
+      openpgp.encrypt(options).then( (ciphertext) => {
+        this.state.peer.send(JSON.stringify({user: 'Anon', message: ciphertext.content}));
+      });
+
+      
      
   }
 
@@ -139,8 +191,6 @@ class App extends Component {
         </div>
         
         <CreateMessage createMessage =  {this.createMessage} peer = {this.peer} />
-
-        <GenerateKeys />
         <CanvasBackground />
       </div>
     );

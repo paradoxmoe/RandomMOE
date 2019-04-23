@@ -42,7 +42,8 @@ class App extends Component {
       peerInfo: null,
       stream: null,
       peer: null,
-      peerStream: null
+      peerPublicKey: null,
+      
     }
     
   }
@@ -117,6 +118,7 @@ class App extends Component {
       if(data.isPublicKey == true) {
         this.setState({peerPublicKey: data.peerPublicKey});
         console.log("Public Key Recieved!");
+        console.log(this.state.peerPublicKey);
       } else {
 
         let privKey = openpgp.key.readArmored(localStorage.privateKey).keys[0];

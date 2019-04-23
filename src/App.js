@@ -133,7 +133,7 @@ class App extends Component {
           let newMessage = {
             id: this.state.chatMessages.length,
             user: data.user,
-            message: plaintext 
+            message: plaintext.data 
           }
           this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
         })
@@ -165,7 +165,7 @@ class App extends Component {
       this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
 
       let options = {
-        data: content,
+        data: openpgp.message.fromText(content),
         publicKeys: openpgp.key.readArmored(this.state.peerPublicKey).keys,
       }
 

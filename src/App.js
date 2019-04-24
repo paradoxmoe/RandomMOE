@@ -118,7 +118,7 @@ class App extends Component {
       if(data.isPublicKey == true) {
         this.setState({peerPublicKey: data.peerPublicKey});
         console.log("Public Key Recieved!");
-        console.log(this.state.peerPublicKey);
+
       } else {
 
         let privKey = openpgp.key.readArmored(localStorage.privateKey).keys[0];
@@ -162,14 +162,13 @@ class App extends Component {
         user: user,
         message: content 
       }
-      this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
 
-      let pubKey = openpgp.key.readArmored(this.state.peerPublicKey).keys
+      this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
       let data = openpgp.message.fromText(content);
 
       let options = {
         message: data,
-        publicKeys: pubKey,
+        publicKeys: (openpgp.key.readArmored(this.state.peerPublicKey)).keys,
       }
 
       openpgp.encrypt(options).then( (ciphertext) => {

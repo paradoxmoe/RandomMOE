@@ -166,7 +166,7 @@ class App extends Component {
 
       let options = {
         data: openpgp.message.fromText(content),
-        publicKeys: openpgp.key.readArmored(this.state.peerPublicKey).keys,
+        publicKeys: ( await openpgp.key.readArmored(this.state.peerPublicKey).keys),
       }
 
       openpgp.encrypt(options).then( (ciphertext) => {

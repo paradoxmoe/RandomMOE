@@ -133,6 +133,8 @@ class App extends Component {
             user: data.user,
             message: plaintext.data 
           }
+
+          console.log(plaintext.data);
           this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
         })
 

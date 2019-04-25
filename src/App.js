@@ -113,7 +113,7 @@ class App extends Component {
     peer.on("data", async (data) => {
       data = JSON.parse(data);
 
-      if(data.isPublicKey == true) {
+      if(data.isPublicKey === true) {
         localStorage.setItem("peerPublicKey", data.peerPublicKey);
         console.log("Public Key Recieved!");
 
@@ -123,7 +123,7 @@ class App extends Component {
         await privKey.decrypt(localStorage.pass);
 
         let options = {
-          message: data.data,
+          message: await openpgp.message.readArmored(data.data),
           privateKey: [privKey]
         }
 

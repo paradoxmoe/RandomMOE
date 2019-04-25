@@ -124,7 +124,7 @@ class App extends Component {
 
         let options = {
           message: await openpgp.message.readArmored(data.data),
-          privateKey: [privKey]
+          privateKeys: [privKey]
         }
 
         openpgp.decrypt(options).then( (plaintext) => {

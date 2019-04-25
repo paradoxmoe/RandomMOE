@@ -173,7 +173,7 @@ class App extends Component {
 
       openpgp.encrypt(options).then( (ciphertext) => {
         let data = ciphertext.data;
-        this.state.peer.send(JSON.stringify({user: 'Anon', 'message': data}));
+        this.state.peer.send(JSON.stringify({user: 'Anon', data: data}));
       });
 
       

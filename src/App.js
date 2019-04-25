@@ -42,8 +42,6 @@ class App extends Component {
       peerInfo: null,
       stream: null,
       peer: null,
-      peerPublicKey: null,
-      
     }
     
   }
@@ -116,7 +114,7 @@ class App extends Component {
       data = JSON.parse(data);
 
       if(data.isPublicKey == true) {
-        this.setState({peerPublicKey: data.peerPublicKey});
+        localStorage.setItem("peerPublicKey", data.peerPublicKey);
         console.log("Public Key Recieved!");
 
       } else {
@@ -125,7 +123,7 @@ class App extends Component {
         privKey.decrypt(localStorage.pass);
 
         let options = {
-          message: data.message,
+          message: data.data,
           privateKey: privKey
         }
 
@@ -155,7 +153,7 @@ class App extends Component {
   }
 
 
-  createMessage = (user, content) => {
+  createMessage = async (user, content) => {
 
       const newMessage = {
         id: this.state.chatMessages.length,
@@ -168,7 +166,7 @@ class App extends Component {
 
       let options = {
         message: data,
-        publicKeys: (openpgp.key.readArmored(this.state.peerPublicKey)).keys,
+        publicKeys: ( await openpgp.key.readArmored(localStorage.peerPublicKey)).keys,
       }
 
       openpgp.encrypt(options).then( (ciphertext) => {

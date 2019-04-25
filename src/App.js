@@ -75,7 +75,6 @@ class App extends Component {
 
       socket.on('joinInitiator', (data) => {
         console.log("Joinining the initiator...");
-        console.log(data.data);
         this.state.peer.signal(data.data);
         
         if(!data.initiator) {
@@ -134,7 +133,6 @@ class App extends Component {
             message: plaintext.data 
           }
 
-          console.log(plaintext.data);
           this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
         })
 

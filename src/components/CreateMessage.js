@@ -16,7 +16,7 @@ class CreateMessage extends Component {
 
     return (
             <form onSubmit = {this.onSubmit} style = {{position: 'fixed', bottom: '0', width: '100%' }}>
-                <input type="text" name="title" style={{flex: '10', padding: '5px'}} placeholder="Type Message Here..." value={this.state.content} onChange={this.onChange}></input>
+                <input type="text" name="title" style={{flex: '10', padding: '5px', width: '90%'}} placeholder="Type Message Here..." value={this.state.content} onChange={this.onChange}></input>
                 <input type="submit" value="submit" className = "btn" style={{flex: '1'}} />
             </form>
     )

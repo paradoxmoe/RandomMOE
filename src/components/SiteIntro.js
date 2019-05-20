@@ -9,7 +9,7 @@ class SiteIntro extends Component {
   render() {    
 
     return (
-            <div id = "overlay" ref = {overlayRef => {this.overlayRef = overlayRef}} >
+            <div id = "overlay" ref = {overlayRef => {this.overlayRef = overlayRef}} >      
                 <p>Please check the <b>TOP RIGHT</b> (in Chrome) <b>TOP LEFT</b> (in Firefox) of your browser and make sure your webcam/mic is accessible to the browser!<br /></p>
                 <p>Welcome to Paradox!</p>
                 <p>Paradox is an <a href="https://github.com/openpgpjs/openpgpjs">encrypted</a>, <a href="https://github.com/feross/simple-peer">peer-to-peer</a>, <a href= "https://github.com/paradoxmoe/paradox">open source</a> random chat alternative to Omegle/Chatroulette/etc.</p>

@@ -211,7 +211,7 @@ class App extends Component {
       </div>
         <div id = "chatApp" class = "disableScrollbars">
           <Chat chatMessages = {this.state.chatMessages} submit = {this.submitButton} />
-          <button type="button" onclick = {this.next} ref = {findUsers => {this.findUsers = findUsers}}>Next</button>
+          <button type="button" onClick = {this.next} ref = {findUsers => {this.findUsers = findUsers}}>Next</button>
         </div>
         {/* <NimblePicker set='messenger' data={data} /> */}
         <CreateMessage createMessage =  {this.createMessage} peer = {this.peer} />

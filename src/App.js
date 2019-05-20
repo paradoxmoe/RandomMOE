@@ -102,7 +102,7 @@ class App extends Component {
 
   next = () => {
     console.log("Finding User...");
-    if(this.state.peer != null && typeof this.state.peer != 'undefined')
+    if(this.state.peer != null && typeof this.state.peer != 'undefined') {
         this.state.peer.destroy();
         this.setState({
           chatMessages: [ 
@@ -112,7 +112,7 @@ class App extends Component {
           peer: null,
           inConvo: false,
         });
-
+      }
           navigator.mediaDevices.getUserMedia({video:true, audio: true}).then(stream => {
             this.socketConnection(stream);
           })

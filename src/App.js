@@ -102,6 +102,7 @@ class App extends Component {
 
   next = () => {
     console.log("Finding User...");
+    if(this.state.peer != null && typeof this.state.peer != 'undefined')
         this.state.peer.destroy();
         this.setState({
           chatMessages: [ 

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 
 class SiteIntro extends Component {
 
-
-
+  overlay  = () => {
+    this.overlayRef.style.display = none;
+  } 
 
   render() {    
 
     return (
-            <div>
+            <div id = "overlay" ref = {overlayRef => {this.overlayRef = overlayRef}} >
                 <p>Please check the <b>TOP RIGHT</b> (in Chrome) <b>TOP LEFT</b> (in Firefox) of your browser and make sure your webcam/mic is accessible to the browser!<br /></p>
                 <p>Welcome to Paradox!</p>
                 <p>Paradox is an <a href="https://github.com/openpgpjs/openpgpjs">encrypted</a>, <a href="https://github.com/feross/simple-peer">peer-to-peer</a>, <a href= "https://github.com/paradoxmoe/paradox">open source</a> random chat alternative to Omegle/Chatroulette/etc.</p>
@@ -19,9 +20,9 @@ class SiteIntro extends Component {
                 <p><a href="http://catbox.moe">Catbox</a> Support! Just Copy and Paste a Catbox.moe URL into the chat! (Images and videos!) </p>
                 <p>As the site is currently in Early Access, please report bugs or other issues <a href= "https://github.com/paradoxmoe/paradox/issues">here</a>!</p>
                 <p>Furthermore, as you are talking to random and anonymous users, please exercise caution when using this platform.</p>
+                <p>We use cookies/local storage to store your PGP encryption keys, so be aware of this.</p>
 
-
-                <a href="" onclick="">Click here if you've read the above!</a>
+                <button onClick={this.overlay}>Click here if you've read the above!</button>
             </div>
     )
   };

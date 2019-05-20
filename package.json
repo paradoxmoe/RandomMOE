@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "emoji-mart": "^2.11.1",
     "express": "^4.16.4",
     "jquery": "^3.4.0",
     "mongoose": "^5.4.19",

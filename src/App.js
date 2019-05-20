@@ -2,12 +2,15 @@
 
 import React, { Component } from 'react';
 import Chat from './components/Chat';
+import SiteIntro from './components/SiteIntro';
 import CreateMessage from './components/CreateMessage';
 import CanvasBackground from './components/CanvasBackground';
 import * as openpgp from 'openpgp';
 import './App.css';
 import Peer from 'simple-peer'; 
 import socketIOClient from 'socket.io-client';
+import data from 'emoji-mart/data/messenger.json'
+import { NimblePicker } from 'emoji-mart'
 import $ from 'jquery';
 
 
@@ -42,6 +45,7 @@ class App extends Component {
       peerInfo: null,
       stream: null,
       peer: null,
+      inConvo: false,
     }
     
   }
@@ -52,12 +56,10 @@ class App extends Component {
       this.clientRef.srcObject = stream;
       this.clientRef.onloaddedmetadata = this.clientRef.play();
       this.forceUpdate();
-      this.socketConnection(stream);
-
     })
   }
 
-  socketConnection(stream) {
+  socketConnection = (stream) => {
     var socket = socketIOClient.connect("https://vaporwaveom.herokuapp.com/");
     console.log("Connecting to server...");
 
@@ -98,11 +100,32 @@ class App extends Component {
     console.log("Can Submit")
   }
 
+  next = () => {
+    if(this.state.inConvo) {
+        this.state.peer.destroy();
+        this.setState({
+          chatMessages: [ 
+          ],
+          peerInfo: null,
+          stream: null,
+          peer: null,
+          inConvo: false,
+        });
+
+    } else {
+          this.setState({inConvo: true});
+          navigator.mediaDevices.getUserMedia({video:true, audio: true}).then(stream => {
+            this.socketConnection(stream);
+          })
+    }
+
+  }
+
   //Needs to be finished
   createPeer = (initiator, stream) => {
   var peer = new Peer({initiator: initiator, trickle: false, stream: stream});
 
-  this.forceUpdate();
+  this.setState({inConvo: true});
   
     peer.on("connect", () => {
         peer.send(JSON.stringify({isPublicKey: true, peerPublicKey: localStorage.publicKey}))
@@ -148,7 +171,7 @@ class App extends Component {
       this.peerRef.onloaddedmetadata = this.peerRef.play();
     });
 
-    this.setState({peer: peer});
+    this.setState({peer: peer, inConvo: true});
     return peer;
   }
 
@@ -182,19 +205,22 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-      
+      <div className="App"> 
+      <SiteIntro />
+
+
       <div id = "videoChat">
-        <div><h3 id = "logo">パラドックス</h3> <a href="https://twitter.com/Twitch_NotDem">Twitter</a> | <a href="https://twitch.tv/notdem">Twitch</a> | <a href="https://github.com/verysimplyms/omreact">Github Repo</a></div>
+        <div><h3 id = "logo">パラドックス</h3> <a href="https://twitter.com/Twitch_NotDem">Twitter</a> | <a href="https://twitch.tv/notdem">Twitch</a> | <a href="https://github.com/verysimplyms/omreact">Github</a></div>
         <video ref = {clientRef => {this.clientRef = clientRef}} controls muted></video>
         <video ref = {peerRef => {this.peerRef = peerRef}} controls></video>
       </div>
         <div id = "chatApp" class = "disableScrollbars">
           <Chat chatMessages = {this.state.chatMessages} submit = {this.submitButton} />
         </div>
-        
+        <NimblePicker set='messenger' data={data} />
         <CreateMessage createMessage =  {this.createMessage} peer = {this.peer} />
         <CanvasBackground />
+        <button type="button" onclick = {this.next} ref = {findUsers => {this.findUsers = findUsers}}>Next</button>
       </div>
     );
   }

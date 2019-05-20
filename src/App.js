@@ -101,7 +101,7 @@ class App extends Component {
   }
 
   next = () => {
-    if(this.state.inConvo) {
+    console.log("Finding User...");
         this.state.peer.destroy();
         this.setState({
           chatMessages: [ 
@@ -112,13 +112,9 @@ class App extends Component {
           inConvo: false,
         });
 
-    } else {
-          this.setState({inConvo: true});
           navigator.mediaDevices.getUserMedia({video:true, audio: true}).then(stream => {
             this.socketConnection(stream);
           })
-    }
-
   }
 
   //Needs to be finished

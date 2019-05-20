@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class SiteIntro extends Component {
 
   overlay  = () => {
-    this.overlayRef.style.display = none;
+    this.overlayRef.style.display = 'none';
   } 
 
   render() {    

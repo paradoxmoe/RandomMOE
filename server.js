@@ -25,7 +25,7 @@ var server = http.createServer(app);
 const io = require('socket.io')(server);
 const path = require('path');
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 80;
 
 var queue = [];
 

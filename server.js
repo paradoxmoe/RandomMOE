@@ -5,27 +5,23 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
-//var https = require('https');
+var https = require('https');
 var http = require('http');
-//const server = require('http').createServer(app);
 
-/*
 var options = {
-    key: fs.readFileSync('./invalidCerts/96461604_192.168.1.43.key'),
-    cert: fs.readFileSync('./invalidCerts/96461604_192.168.1.43.cert'),
-    rejectUnauthorized: false,
-    requestCert: false
-
+    key: fs.readFileSync('/home/ubuntu/certs/sslforfree/private.key'),
+    cert: fs.readFileSync('/home/ubuntu/certs/sslforfree/certificate.crt'),
+    ca: fs.readFileSync('/home/ubuntu/certs/sslforfree/ca_bundle.crt')
     }
-*/
 
-var server = http.createServer(app);
-//var serverUnsecure = http.createServer(app)
+
+var server = https.createServer(options, app);
+var serverUnsecure = http.createServer(app)
 
 const io = require('socket.io')(server);
 const path = require('path');
 
-var port = process.env.PORT || 80;
+var port = 443;
 
 var queue = [];
 
@@ -43,19 +39,16 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-
 /*
-function redirectSec(req, res, next) {
-  if (!req.secure) {
-      res.redirect('https://' + req.headers.host + req.path);
-  } else {
-      return next();
-  }
-}
+app.get('/.well-known/acme-challenge/:file', function(req, res) {
+
+   res.sendFile(__dirname + '/.well-known/acme-challenge/' + req.params.file);
+})
+
 */
 
 server.listen(port);
-//serverUnsecure.listen(80);
+serverUnsecure.listen(80);
 
 io.on('connection', (socket) => {
   console.log("User Connected");
@@ -102,4 +95,4 @@ io.on('connection', (socket) => {
  })
 });
 
-console.log("Server is listening on port: " + port);
+console.log("Server is listening on port: " + port + ", 80");

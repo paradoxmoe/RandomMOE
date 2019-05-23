@@ -21,7 +21,7 @@ var serverUnsecure = http.createServer(app)
 const io = require('socket.io')(server);
 const path = require('path');
 
-var port = 443;
+var port = process.env.PORT || 8080;
 
 var queue = [];
 

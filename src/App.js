@@ -60,7 +60,7 @@ class App extends Component {
   }
 
   socketConnection = (stream) => {
-    var socket = socketIOClient.connect("https://vaporwaveom.herokuapp.com/");   
+    var socket = socketIOClient.connect("https://random.moe");   
     this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Server..."}]})
     socket.on('peer', (data) => {
       this.createPeer(data.initiator, stream);
@@ -206,7 +206,7 @@ class App extends Component {
       <SiteIntro />
 
       <div id = "videoChat">
-        <div><h3 id = "logo">パラドックス</h3> <a href="https://twitter.com/Twitch_NotDem">Twitter</a> | <a href="https://twitch.tv/notdem">Twitch</a> | <a href="https://github.com/verysimplyms/omreact">Github</a></div>
+        <div><h3 id = "logo">ランダム</h3> <a href="https://twitter.com/Twitch_NotDem">Twitter</a> | <a href="https://twitch.tv/notdem">Twitch</a> | <a href="https://github.com/paradoxmoe/paradox">Github</a></div>
         <video ref = {clientRef => {this.clientRef = clientRef}} controls muted></video>
         <video ref = {peerRef => {this.peerRef = peerRef}} controls></video>
       </div>

@@ -60,9 +60,8 @@ class App extends Component {
   }
 
   socketConnection = (stream) => {
-    var socket = socketIOClient.connect("https://vaporwaveom.herokuapp.com/");
-    console.log("Connecting to server...");
-
+    var socket = socketIOClient.connect("https://vaporwaveom.herokuapp.com/");   
+    this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Server..."}]})
     socket.on('peer', (data) => {
       this.createPeer(data.initiator, stream);
       
@@ -70,20 +69,20 @@ class App extends Component {
       if(data.initiator) {
         this.state.peer.on("signal", (data) => {
           socket.emit("initiatorData", data);
-          console.log("Emitting Initiator data to Server...");
+          this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Emitting Initiator data to Server..."}]})
         })
       }
     });
 
       socket.on('joinInitiator', (data) => {
-        console.log("Joinining the initiator...");
+        this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Joining Initiator..."}]})
         this.state.peer.signal(data.data);
         
         if(!data.initiator) {
           var initiaitorSocketId = data.socketid;
           this.state.peer.on('signal', (data) => {
             socket.emit("backToInitiator", {socketid: initiaitorSocketId, data: data});
-            console.log("Recieving Initiator's Data..");
+            this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Recieving Initiator's Data..."}]})
           })
         }
       })
@@ -91,7 +90,7 @@ class App extends Component {
       socket.on('toInitiatorFromServer', (data) => {
         this.state.peer.signal(data.data);
 
-        console.log("Connecting to Peer...");
+        this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Peer..."}]})
       })
     
   }
@@ -101,7 +100,7 @@ class App extends Component {
   }
 
   next = () => {
-    console.log("Finding User...");
+    this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Finding User..."}]})
     if(this.state.peer != null && typeof this.state.peer != 'undefined') {
         this.state.peer.destroy();
         this.setState({
@@ -126,7 +125,7 @@ class App extends Component {
   
     peer.on("connect", () => {
         peer.send(JSON.stringify({isPublicKey: true, peerPublicKey: localStorage.publicKey}))
-        console.log("Sent Public Key!");
+        this.setState({chatMessages: []});
     })
 
     peer.on("data", async (data) => {
@@ -135,6 +134,7 @@ class App extends Component {
       if(data.isPublicKey === true) {
         localStorage.setItem("peerPublicKey", data.peerPublicKey);
         console.log("Public Key Recieved!");
+        this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"You can now send messages!"}]});
 
       } else {
 

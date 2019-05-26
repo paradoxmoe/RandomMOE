@@ -206,7 +206,7 @@ class App extends Component {
       <SiteIntro />
 
       <div id = "videoChat">
-        <div><h3 id = "logo">Random.moe</h3> <a href="https://www.patreon.com/randomMOE">Patreon</a> | <a href="https://twitter.com/Twitch_NotDem">Twitter</a> | <a href="https://twitch.tv/notdem">Twitch</a> | <a href="https://github.com/paradoxmoe/paradox">Github</a></div>
+        <div><h3 id = "logo">Random.moe</h3> <a href="https://www.patreon.com/randomMOE">Patreon</a> | <a href="https://twitter.com/Twitch_NotDem">Twitter</a> | <a href="https://twitch.tv/notdem">Twitch</a> | <a href="https://github.com/paradoxmoe/RandomMOE">Github</a></div>
         <video ref = {clientRef => {this.clientRef = clientRef}} controls muted></video>
         <video ref = {peerRef => {this.peerRef = peerRef}} controls></video>
       </div>

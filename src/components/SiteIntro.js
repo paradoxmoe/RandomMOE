@@ -22,6 +22,7 @@ class SiteIntro extends Component {
                 <p>Furthermore, as you are talking to random and anonymous users, please exercise caution when using this platform.</p>
                 <p>We use cookies/local storage to store your PGP encryption keys, so be aware of this.</p>
 
+                <p>If you'd like to contribute to the success of random.moe, please visit our <a href="https://www.patreon.com/randomMOE">Patreon</a>!</p>
                 <button onClick={this.overlay}>Click here if you've read the above!</button>
             </div>
     )

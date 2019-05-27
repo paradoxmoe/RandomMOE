@@ -1,6 +1,7 @@
 {
-  "short_name": "Random.moe",
+  "short_name": "Random.moe | Chat with Anonymous, Random Users",
   "name": "Meet a random, share a moment",
+  "description": "Random.moe is an anonymous, encrypted, peer-to-peer, open source random chat alternative to Omegle/Chatroulette/etc. We support sending images and videos, so get creative!",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +11,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#FF00FF",
   "background_color": "#ffffff"
 }

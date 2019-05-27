@@ -3,12 +3,12 @@ Random.moe is an encrypted, peer-to-peer, open source random chat alternative to
 
 Special thanks to: [Kecer](http://stackoverflow.com/a/35387759) on Stackoverflow and [Kaustav](https://codepen.io/Anomaly942/) on CodePen
 
-##Youtube Support! 
+### Youtube Support! 
 Just Copy and Paste a youtube URL into the chat!
 
-##Imgur support!
+### Imgur support!
 
-##Catbox Support! 
+### Catbox Support! 
 Just Copy and Paste a Catbox.moe URL into the chat! (Images and videos!)
 
 As the site is currently in Early Access, please report bugs or other issues here!

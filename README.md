@@ -22,4 +22,4 @@ We use cookies/local storage to store your PGP encryption keys, so be aware of t
 Due to Chrome's security restrictions, any domain Random.moe runs on MUST have a valid SSL certificate in order to use a user's webcam (excluding localhost).
 With small modifications to the source code on this repo to the server.js file, you can run a test demo on Heroku. 
 
-As this is a react project, you must run `npm run build` to any changes made to any file in this repository (exluding server.js)
+As this is a react project, you must run `npm run build` to any changes made to any file in this repository (excluding server.js)

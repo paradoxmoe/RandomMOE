@@ -6,11 +6,25 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
+import { Console } from "nes-emulator";
 
 class Messages extends Component {
   
     constructor(props) {
         super(props)
+        this.console = new Console();
+                // Will notify `this.notify` upon events
+                this.console.addObserver( this );
+    }
+
+    notify = (t, e) => {
+        switch(t) {
+            case 'frame-ready' : {
+                var ctx = this.clientNesRef.getContext("2d");
+                var data = new ImageData(e);
+                ctx.putImageData(data, 0, 0);
+            }
+        }
     }
 
     getStyle = (user) => {
@@ -38,6 +52,16 @@ class Messages extends Component {
                 )
             } else if(splitContent[1] == "jpg" || splitContent[1] == "jpeg" || splitContent[1] == "png" || splitContent[1] == "gif")  {
                 return <div ><br /><img src = {content} alt="User Content" /></div>
+            } else if (splitContent[1] == "nes") {
+                this.console.loadROM(content);
+                this.console.start();
+
+                return (
+                    <div>
+                        <canvas ref = {clientNesRef => {this.clientNesRef = clientNesRef }} style = {{height: 300, width: 400}}> </canvas>
+                    </div>
+                )
+                
             } else {
                 return null
             }

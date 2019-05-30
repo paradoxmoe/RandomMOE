@@ -6,6 +6,10 @@ class SiteIntro extends Component {
     this.overlayRef.style.display = 'none';
   } 
 
+  componentDidMount() {
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  }
+
   render() {    
 
     return (
@@ -25,13 +29,12 @@ class SiteIntro extends Component {
                 <p>If you'd like to contribute to the success of random.moe, please visit our <a href="https://www.patreon.com/randomMOE">Patreon</a>!</p>
                 <button onClick={this.overlay}>Click here if you've read the above!</button>
 
-                <script type="text/javascript">
-                    google_ad_client = "ca-pub-4945903400451091";
-                    google_ad_slot = "3171544049";
-                    google_ad_width = 970;
-                    google_ad_height = 250;
-                </script>
-        <script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
+                <ins className="adsbygoogle"
+                  style={{display: 'block', width: '970px', height: '250px'}}
+                  data-ad-client="ca-pub-4945903400451091"
+                  data-ad-slot="3171544049">
+                 </ins>
+
             </div>
     )
   };

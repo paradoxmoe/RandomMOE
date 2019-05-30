@@ -1,12 +1,13 @@
 //Test files
 //https://files.catbox.moe/v71b50.jpg
 //https://files.catbox.moe/d0sb20.mp4
+//https://files.catbox.moe/u5qtaf.nes
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
-import { Console } from "nes-emulator";
+import Console  from "./core/Console.js";
 
 class Messages extends Component {
   
@@ -15,17 +16,7 @@ class Messages extends Component {
         this.console = new Console();
                 // Will notify `this.notify` upon events
                 this.console.addObserver( this );
-    }
-
-    notify = (t, e) => {
-        switch(t) {
-            case 'frame-ready' : {
-                var ctx = this.clientNesRef.getContext("2d");
-                var data = new ImageData(e);
-                ctx.putImageData(data, 0, 0);
-            }
-        }
-    }
+    }    
 
     getStyle = (user) => {
         if( user === "You" ) {

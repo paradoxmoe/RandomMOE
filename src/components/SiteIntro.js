@@ -7,7 +7,10 @@ class SiteIntro extends Component {
   } 
 
   componentDidMount() {
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
+    (window.adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4945903400451091",
+      enable_page_level_ads: true
+ });
   }
 
   render() {    

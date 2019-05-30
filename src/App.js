@@ -9,9 +9,9 @@ import * as openpgp from 'openpgp';
 import './App.css';
 import Peer from 'simple-peer'; 
 import socketIOClient from 'socket.io-client';
-import data from 'emoji-mart/data/messenger.json'
-import { NimblePicker } from 'emoji-mart'
-import $ from 'jquery';
+//import data from 'emoji-mart/data/messenger.json'
+//import { NimblePicker } from 'emoji-mart'
+//import $ from 'jquery';
 
 
 openpgp.initWorker({path: './dist/openpgp.worker.min.js'}); 

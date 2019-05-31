@@ -25,6 +25,8 @@ class SiteIntro extends Component {
                 <p>Youtube Support! Just Copy and Paste a youtube URL into the chat!</p>
                 <p>Imgur support! </p>
                 <p><a href="http://catbox.moe">Catbox</a> Support! Just Copy and Paste a Catbox.moe URL into the chat! (Images and videos!) </p>
+                <p><a href="https://simmer.io">Simmer Support!</a> Just Copy and Paste the <b>embed code</b> into the chat!</p>
+                
                 <p>As the site is currently in Early Access, please report bugs or other issues <a href= "https://github.com/paradoxmoe/RandomMOE/issues">here</a>!</p>
                 <p>Furthermore, as you are talking to random and anonymous users, please exercise caution when using this platform.</p>
                 <p>We use cookies/local storage to store your PGP encryption keys, so be aware of this.</p>

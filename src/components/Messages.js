@@ -56,8 +56,6 @@ class Messages extends Component {
             )
         } else if (simmerRegExp.test(content)) {
                 var simmerURL = simmerRegExp.exec(content)[0];
-                console.log(simmerURL)
-
                 return (
                     <div><iframe src= { simmerURL } style= {{ width:960, height:540, border:0 }}></iframe> <br /></div>
                 )

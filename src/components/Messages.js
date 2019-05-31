@@ -45,7 +45,8 @@ class Messages extends Component {
             } else if(splitContent[1] == "jpg" || splitContent[1] == "jpeg" || splitContent[1] == "png" || splitContent[1] == "gif")  {
                 return <div ><br /><img src = {content} alt="User Content" /></div>
             } else if(simmerRegExp.test(content)) {
-                var simmerURL = simmerRegExp.exec(content)[0];
+                var simmerURL = simmerRegExp.exec(content);
+                console.log(simmerURL)
 
                 return (
                     <div><iframe src= { simmerURL } style="width:960px;height:540px;border:0"></iframe> <br /></div>

@@ -49,7 +49,7 @@ class Messages extends Component {
                 console.log(simmerURL)
 
                 return (
-                    <div><iframe src= { simmerURL } style="width:960px;height:540px;border:0"></iframe> <br /></div>
+                    <div><iframe src= { simmerURL } style= {{ width:960, height:540, border:0 }}></iframe> <br /></div>
                 )
                 
             } else {

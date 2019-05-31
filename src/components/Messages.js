@@ -1,21 +1,19 @@
 //Test files
 //https://files.catbox.moe/v71b50.jpg
 //https://files.catbox.moe/d0sb20.mp4
-//https://files.catbox.moe/u5qtaf.nes
+
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
-import Console  from "./core/Console.js";
+
 
 class Messages extends Component {
   
     constructor(props) {
         super(props)
-        this.console = new Console();
-                // Will notify `this.notify` upon events
-                this.console.addObserver( this );
+
     }    
 
     getStyle = (user) => {
@@ -43,18 +41,15 @@ class Messages extends Component {
                 )
             } else if(splitContent[1] == "jpg" || splitContent[1] == "jpeg" || splitContent[1] == "png" || splitContent[1] == "gif")  {
                 return <div ><br /><img src = {content} alt="User Content" /></div>
-            } else if (splitContent[1] == "nes") {
-                this.console.loadROM(content);
-                this.console.start();
+            } else if(content.test(/(https:\/\/c\.simmer\.io\/static\/unityFrame\/index\.html\?url=https)([^a-z]+)(simmercdn.com%2Funity%2F)([a-zA-Z0-9]{28})(%2Fcontent%2F)([a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}&imagePath=screens\/[a-zA-Z0-9]{1}.png)/)) {
+                var simmerURL = content.match(/(https:\/\/c\.simmer\.io\/static\/unityFrame\/index\.html\?url=https)([^a-z]+)(simmercdn.com%2Funity%2F)([a-zA-Z0-9]{28})(%2Fcontent%2F)([a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}&imagePath=screens\/[a-zA-Z0-9]{1}.png)/)
 
                 return (
-                    <div>
-                        <canvas ref = {clientNesRef => {this.clientNesRef = clientNesRef }} style = {{height: 300, width: 400}}> </canvas>
-                    </div>
+                    <iframe src= {simmerURL} style="width:960px;height:540px;border:0"></iframe>
                 )
                 
             } else {
-                return null
+                return null;
             }
         } else if((splitContent[2] === "www.youtube.com" || splitContent[2] === "youtube.com" || splitContent[2] === "youtu.be" || splitContent[2] === "www.youtu.be")) {            
             const regexp = /^.*(watch\?v=)/;

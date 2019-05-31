@@ -1,7 +1,7 @@
 //Test files
 //https://files.catbox.moe/v71b50.jpg
 //https://files.catbox.moe/d0sb20.mp4
-
+//http://regexr.com/4f2iu
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
@@ -32,8 +32,7 @@ class Messages extends Component {
             return null;
         }
 
-        var simmerRegExp = new RegExp(/(https:\/\/c\.simmer\.io\/static\/unityFrame\/index\.html\?url=https)([^a-z]+)(simmercdn.com%2Funity%2F)([a-zA-Z0-9]{28})(%2Fcontent%2F)([a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}&imagePath=screens\/[a-zA-Z0-9]{1}.png)/)
-
+        var simmerRegExp = new RegExp(/(https:\/\/c\.simmer\.io\/static\/unityFrame\/index\.html\?url=https)([^a-z]+)(simmercdn.com%2Funity%2F)([a-zA-Z0-9]{28})(%2Fcontent%2F)([a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}&imagePath=screens\/[a-zA-Z0-9]{1}.png)/);
         var splitContent = content.split('/');
         if(splitContent[2] === "files.catbox.moe" || splitContent[2] === "i.imgur.com") {
             splitContent = splitContent[3].split(".");

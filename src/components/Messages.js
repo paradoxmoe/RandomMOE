@@ -48,7 +48,7 @@ class Messages extends Component {
                 var simmerURL = simmerRegExp.match(content)
 
                 return (
-                    <iframe src= {simmerURL} style="width:960px;height:540px;border:0"></iframe>
+                    <div><iframe src= { simmerURL } style="width:960px;height:540px;border:0"></iframe> <br /></div>
                 )
                 
             } else {

@@ -5,14 +5,7 @@ class SiteIntro extends Component {
   overlay  = () => {
     this.overlayRef.style.display = 'none';
   } 
-
-  componentDidMount() {
-    (window.adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: "ca-pub-4945903400451091",
-      enable_page_level_ads: true
- });
-  }
-
+  
   render() {    
 
     return (
@@ -33,12 +26,6 @@ class SiteIntro extends Component {
 
                 <p>If you'd like to contribute to the success of random.moe, please visit our <a href="https://www.patreon.com/randomMOE">Patreon</a>!</p>
                 <button onClick={this.overlay}>Click here if you've read the above!</button>
-
-                <ins className="adsbygoogle"
-                  style={{display: 'block', width: '970px', height: '250px'}}
-                  data-ad-client="ca-pub-4945903400451091"
-                  data-ad-slot="3171544049">
-                 </ins>
 
             </div>
     )

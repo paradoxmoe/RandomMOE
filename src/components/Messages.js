@@ -31,6 +31,9 @@ class Messages extends Component {
         } else if (content.length <= 0) {
             return null;
         }
+
+        var simmerRegExp = new RegExp(/(https:\/\/c\.simmer\.io\/static\/unityFrame\/index\.html\?url=https)([^a-z]+)(simmercdn.com%2Funity%2F)([a-zA-Z0-9]{28})(%2Fcontent%2F)([a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}&imagePath=screens\/[a-zA-Z0-9]{1}.png)/)
+
         var splitContent = content.split('/');
         if(splitContent[2] === "files.catbox.moe" || splitContent[2] === "i.imgur.com") {
             splitContent = splitContent[3].split(".");
@@ -41,8 +44,8 @@ class Messages extends Component {
                 )
             } else if(splitContent[1] == "jpg" || splitContent[1] == "jpeg" || splitContent[1] == "png" || splitContent[1] == "gif")  {
                 return <div ><br /><img src = {content} alt="User Content" /></div>
-            } else if(content.test(/(https:\/\/c\.simmer\.io\/static\/unityFrame\/index\.html\?url=https)([^a-z]+)(simmercdn.com%2Funity%2F)([a-zA-Z0-9]{28})(%2Fcontent%2F)([a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}&imagePath=screens\/[a-zA-Z0-9]{1}.png)/)) {
-                var simmerURL = content.match(/(https:\/\/c\.simmer\.io\/static\/unityFrame\/index\.html\?url=https)([^a-z]+)(simmercdn.com%2Funity%2F)([a-zA-Z0-9]{28})(%2Fcontent%2F)([a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}&imagePath=screens\/[a-zA-Z0-9]{1}.png)/)
+            } else if(simmerRegExp.test(content)) {
+                var simmerURL = simmerRegExp.match(content)
 
                 return (
                     <iframe src= {simmerURL} style="width:960px;height:540px;border:0"></iframe>

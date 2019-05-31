@@ -42,15 +42,7 @@ class Messages extends Component {
                 <div ><br /><video ref = {vidRef => {this.vidRef = vidRef }} onLoadedMetadata = {this.scrollToBottomVideo} controls autoplay> <source src={content} ></source></video> </div>
                 )
             } else if(splitContent[1] == "jpg" || splitContent[1] == "jpeg" || splitContent[1] == "png" || splitContent[1] == "gif")  {
-                return <div ><br /><img src = {content} alt="User Content" /></div>
-            } else if(simmerRegExp.test(content)) {
-                var simmerURL = simmerRegExp.exec(content)[0];
-                console.log(simmerURL)
-
-                return (
-                    <div><iframe src= { simmerURL } style= {{ width:960, height:540, border:0 }}></iframe> <br /></div>
-                )
-                
+                return <div ><br /><img src = {content} alt="User Content" /></div>                
             } else {
                 return null;
             }
@@ -62,6 +54,13 @@ class Messages extends Component {
                 
                 <div><iframe width="560" height="315" src={youtubeURL} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
             )
+        } else if (simmerRegExp.test(content)) {
+                var simmerURL = simmerRegExp.exec(content)[0];
+                console.log(simmerURL)
+
+                return (
+                    <div><iframe src= { simmerURL } style= {{ width:960, height:540, border:0 }}></iframe> <br /></div>
+                )
         } else {
             return null
         }

@@ -16,6 +16,9 @@ class SiteIntro extends Component {
                 <p>Special thanks to: <a href='http://stackoverflow.com/a/35387759'>Kecer</a> on Stackoverflow and <a href="https://codepen.io/Anomaly942/">Kaustav</a> on CodePen</p>
             
                 <p>Youtube Support! Just Copy and Paste a youtube URL into the chat!</p>
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/59UMqAvQoXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
                 <p>Imgur support! </p>
                 <p><a href="http://catbox.moe">Catbox</a> Support! Just Copy and Paste a Catbox.moe URL into the chat! (Images and videos!) </p>
                 <p><a href="https://simmer.io">Simmer Support!</a> Just Copy and Paste the <b>embed code</b> into the chat!</p>

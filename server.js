@@ -18,7 +18,10 @@ var options = {
 var server = https.createServer(options, app);
 var serverUnsecure = http.createServer(app)
 
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+  pingInterval: 5000,
+  pingTimeout: 3000
+});
 const path = require('path');
 
 var port = process.env.PORT || 8080;
@@ -87,6 +90,12 @@ io.on('connection', (socket) => {
     var socketid = socket.id;
     queue.push({socketid: socketid, data});
     
+ });
+
+ socket.on("disconnect", function() {
+    if(typeof queue[socket.id] != null || typeof queue[socket.id] != 'undefined') {
+      delete queue[socket.id];
+    }
  });
 
  socket.on('backToInitiator', function(data) {

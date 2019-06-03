@@ -96,7 +96,7 @@ io.on('connection', (socket) => {
    for(var i = 0; i < queue.length; i++) {
      if(typeof queue[i] != null || typeof queue[i] != 'undefined') {
           if(queue[i]["socketid"] == socket.id) {
-            delete queue[i];
+            queue.splice(i, 1);
             console.log("User removed from queue");
             break;
           }

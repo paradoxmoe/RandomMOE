@@ -20,6 +20,7 @@ class SiteIntro extends Component {
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/59UMqAvQoXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                 <p>Imgur support! </p>
+                <p><a href="www.twitch.tv">Twitch</a> Support!</p>
                 <p><a href="http://catbox.moe">Catbox</a> Support! Just Copy and Paste a Catbox.moe URL into the chat! (Images and videos!) </p>
                 <p><a href="https://simmer.io">Simmer Support!</a> Just Copy and Paste the <b>embed code</b> into the chat!</p>
                 

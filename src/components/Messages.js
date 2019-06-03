@@ -63,7 +63,7 @@ class Messages extends Component {
             console.log(splitContent[3]);
             var twitchURL = "https://player.twitch.tv/?channel=" + splitContent[3];
 
-            return (<iframe src= {twitchURL} frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>)
+            return (<div><br /><iframe src= {twitchURL} frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe></div>)
         } else {
             return null
         }

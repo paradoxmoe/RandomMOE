@@ -94,7 +94,7 @@ io.on('connection', (socket) => {
 
  socket.on("disconnect", function() {
    console.log("User disconnected");
-   for(var i = 0; i < queue.length(); i++) {
+   for(var i = 0; i < queue.length; i++) {
      if(typeof queue[i] != null || typeof queue[i] != 'undefined') {
        if(queue[i][socket.id] != null || queue[i][socket.id] != 'undefined')
           delete queue[i][socket.id];

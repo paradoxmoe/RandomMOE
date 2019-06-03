@@ -93,9 +93,14 @@ io.on('connection', (socket) => {
  });
 
  socket.on("disconnect", function() {
-    if(typeof queue[socket.id] != null || typeof queue[socket.id] != 'undefined') {
-      delete queue[socket.id];
+   console.log("User disconnected");
+   for(int i = 0; i < queue.length(); i++) {
+     if(typeof queue[i] != null || typeof queue[i] != 'undefined') {
+       if(queue[i][socket.id] != null || != 'undefined')
+          delete queue[i][socket.id];
     }
+   }
+    
  });
 
  socket.on('backToInitiator', function(data) {

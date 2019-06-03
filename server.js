@@ -24,8 +24,8 @@ const io = require('socket.io')(server, {
 });
 const path = require('path');
 
-var port = process.env.PORT || 8080;
-
+var port = process.env.PORT || 443;
+var portUnsecure = 80;
 var queue = [];
 
 app.use(function (req, res, next) {
@@ -51,7 +51,7 @@ app.get('/.well-known/acme-challenge/:file', function(req, res) {
 */
 
 server.listen(port);
-serverUnsecure.listen(80);
+serverUnsecure.listen(portUnsecure);
 
 io.on('connection', (socket) => {
   console.log("User Connected");
@@ -104,4 +104,4 @@ io.on('connection', (socket) => {
  })
 });
 
-console.log("Server is listening on port: " + port + ", 80");
+console.log("Server is listening on port: " + port + ", " + portUnsecure);

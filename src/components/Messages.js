@@ -60,10 +60,10 @@ class Messages extends Component {
                     <div><iframe src= { simmerURL } style= {{ width:960, height:540, border:0 }}></iframe> <br /></div>
                 )
         } else if(splitContent[2] === "www.twitch.tv" || splitContent[2] === "twitch.tv") {
-
+            console.log(splitContent[3]);
             var twitchURL = "https://player.twitch.tv/?channel=" + splitContent[3];
 
-            return (<iframe src= {{twitchURL}} frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>)
+            return (<iframe src= {twitchURL} frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>)
         } else {
             return null
         }

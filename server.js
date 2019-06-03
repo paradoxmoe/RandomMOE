@@ -79,7 +79,6 @@ io.on('connection', (socket) => {
     if(queue.length <= 0) {
       socket.emit('peer', {initiator: true});
       console.log("Client told to become initiator");
-      console.log("Users in queue: " + queue.length);
      } else {
        socket.emit('peer', {initiator: false});
        socket.emit('joinInitiator', queue.pop());
@@ -89,15 +88,19 @@ io.on('connection', (socket) => {
   socket.on('initiatorData', function(data) {
     var socketid = socket.id;
     queue.push({socketid: socketid, data});
-    
+    console.log("Users in queue: " + queue.length);
  });
 
  socket.on("disconnect", function() {
    console.log("User disconnected");
    for(var i = 0; i < queue.length; i++) {
      if(typeof queue[i] != null || typeof queue[i] != 'undefined') {
-       if(queue[i][socket.id] != null || queue[i][socket.id] != 'undefined')
-          delete queue[i][socket.id];
+          if(queue[i]["socketid"] == socket.id) {
+            delete queue[i];
+            console.log("User removed from queue");
+            break;
+          }
+
     }
    }
     

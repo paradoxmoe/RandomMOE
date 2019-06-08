@@ -113,7 +113,12 @@ class App extends Component {
         });
       }
           navigator.mediaDevices.getUserMedia({video:true, audio: true}).then(stream => {
-            this.socketConnection(stream);
+            try {
+              this.socketConnection(stream);
+            } catch (err) {
+              this.next();
+              this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Sorry, there was likely a connection error. Trying again..."}]})
+            }
           })
   }
 

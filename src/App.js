@@ -59,6 +59,11 @@ class App extends Component {
     })
   }
 
+  componentDidCatch(err, info) {
+    console.log(err);
+    console.log(info);
+  }
+
   socketConnection = (stream) => {
     var socket = socketIOClient.connect("https://random.moe");   
     this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Server..."}]})
@@ -76,11 +81,8 @@ class App extends Component {
 
       socket.on('joinInitiator', (data) => {
         this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Joining Initiator..."}]})
-        try {
-          this.state.peer.signal(data.data);
-        } catch (err) {
-          this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Sorry, there was likely a connection error. Please try again."}]})
-        }
+        this.state.peer.signal(data.data);
+ 
 
         if(!data.initiator) {
           var initiaitorSocketId = data.socketid;
@@ -92,13 +94,9 @@ class App extends Component {
       })
 
       socket.on('toInitiatorFromServer', (data) => {
-        try {
-          this.state.peer.signal(data.data);
-        } catch (err) {
-          this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Sorry, there was likely a connection error. Please try again."}]})
-        }
-        
-        this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Peer..."}]})
+       
+          this.state.peer.signal(data.data);  
+          this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Peer..."}]})
       })
     
   }
@@ -121,12 +119,7 @@ class App extends Component {
         });
       }
           navigator.mediaDevices.getUserMedia({video:true, audio: true}).then(stream => {
-            try {
-              this.socketConnection(stream);
-            } catch (err) {
-              this.next();
-              this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Sorry, there was likely a connection error. Trying again..."}]})
-            }
+          this.socketConnection(stream);
           })
   }
 

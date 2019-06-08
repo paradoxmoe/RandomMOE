@@ -76,8 +76,12 @@ class App extends Component {
 
       socket.on('joinInitiator', (data) => {
         this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Joining Initiator..."}]})
-        this.state.peer.signal(data.data);
-        
+        try {
+          this.state.peer.signal(data.data);
+        } catch (err) {
+          this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Sorry, there was likely a connection error. Please try again."}]})
+        }
+
         if(!data.initiator) {
           var initiaitorSocketId = data.socketid;
           this.state.peer.on('signal', (data) => {
@@ -88,8 +92,12 @@ class App extends Component {
       })
 
       socket.on('toInitiatorFromServer', (data) => {
-        this.state.peer.signal(data.data);
-
+        try {
+          this.state.peer.signal(data.data);
+        } catch (err) {
+          this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Sorry, there was likely a connection error. Please try again."}]})
+        }
+        
         this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Peer..."}]})
       })
     

@@ -54,6 +54,9 @@ class App extends Component {
       this.clientRef.srcObject = stream;
       this.clientRef.onloaddedmetadata = this.clientRef.play();
       this.forceUpdate();
+    }).catch((err) => {
+      this.clientRef.srcObject = false;
+      this.forceUpdate();
     })
   }
 
@@ -141,7 +144,7 @@ class App extends Component {
       data = JSON.parse(data);
 
       if(data.isPublicKey === true) {
-        localStorage.setItem("peerPublicKey", data.peerPublicKey);
+        sessionStorage.setItem("peerPublicKey", data.peerPublicKey);
         console.log("Public Key Recieved!");
         this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"You can now send messages!"}]});
 
@@ -191,7 +194,7 @@ class App extends Component {
 
       let options = {
         message: data,
-        publicKeys: ( await openpgp.key.readArmored(localStorage.peerPublicKey)).keys,
+        publicKeys: ( await openpgp.key.readArmored(sessionStorage.peerPublicKey)).keys,
       }
 
       try {

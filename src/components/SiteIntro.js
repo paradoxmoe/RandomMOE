@@ -30,6 +30,9 @@ class SiteIntro extends Component {
                 <p>We use cookies/local storage to store your PGP encryption keys, so be aware of this.</p>
 
                 <p>If you'd like to contribute to the success of random.moe, please visit our <a href="https://www.patreon.com/randomMOE">Patreon</a>!</p>
+                
+                <p>Lastly, even if you don't have a webcam, i'd recommend using <a href="http://www.oldversion.com/windows/manycam-2-6-1">ManyCam</a> (or something similar) </p>
+                
                 <button onClick={this.overlay}>Click here if you've read the above!</button>
 
             </div>

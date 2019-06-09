@@ -127,6 +127,8 @@ class App extends Component {
   this.setState({inConvo: true});
   
     peer.on("error", (err) => {
+      this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:  err.code + " Error. Try clicking next, or refreshing if problem persists"}]});
+      console.log(err);
       console.log(err.code);
     })
 

@@ -128,12 +128,12 @@ class App extends Component {
   
     peer.on("error", (err) => {
       switch (err)  {
-        case "Error: InvalidStateError: Failed to set remote answer sdp: Called in wrong state: kStable": {
+        case "InvalidStateError: Failed to set remote answer sdp: Called in wrong state: kStable": {
           this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"kStable error. Usually due to pressing 'NEXT' too much. Try clicking next!"}]});
           break;
         }
 
-        case "Error: Ice connection failed.": {
+        case "Ice connection failed.": {
           this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"Ice Connection error. Usually due to poor internet connection between both users. Try clicking next!"}]});
           break;
         }

@@ -35,7 +35,6 @@ if(typeof localStorage.publicKey == 'undefined' || typeof localStorage.privateKe
 }
 
 class App extends Component {
-  
 
   constructor(props) {
     super(props);
@@ -51,7 +50,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-
     navigator.mediaDevices.getUserMedia({video:true, audio: true}).then(stream => {
       this.clientRef.srcObject = stream;
       this.clientRef.onloaddedmetadata = this.clientRef.play();
@@ -98,7 +96,6 @@ class App extends Component {
           this.state.peer.signal(data.data);  
           this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Peer..."}]})
       })
-    
   }
 
   submitButton = () => {
@@ -129,6 +126,11 @@ class App extends Component {
 
   this.setState({inConvo: true});
   
+    peer.on("error", (err) => {
+      this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"Simple-Peer error has occured. Check JS console."}]});
+      console.log(err);
+    })
+
     peer.on("connect", () => {
         peer.send(JSON.stringify({isPublicKey: true, peerPublicKey: localStorage.publicKey}))
         this.setState({chatMessages: []});
@@ -161,11 +163,7 @@ class App extends Component {
 
           this.setState({chatMessages: [...this.state.chatMessages, newMessage]});
         })
-
-
       }
-
-
     });
 
     peer.on("stream", (data) => {
@@ -195,16 +193,15 @@ class App extends Component {
         publicKeys: ( await openpgp.key.readArmored(localStorage.peerPublicKey)).keys,
       }
 
+      try {
       openpgp.encrypt(options).then( (ciphertext) => {
         let data = ciphertext.data;
         this.state.peer.send(JSON.stringify({user: 'Anon', data: data}));
-      });
-
-      
-     
+      });    
+    } catch (err) {
+      this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"There was an error sending the message..."}]});
+    } 
   }
-
-
 
   render() {
     return (

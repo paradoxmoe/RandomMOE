@@ -55,8 +55,9 @@ class App extends Component {
       this.clientRef.onloaddedmetadata = this.clientRef.play();
       this.forceUpdate();
     }).catch((err) => {
-      this.clientRef.srcObject = false;
-      this.forceUpdate();
+      navigator.mediaDevices.getUserMedia({video:false, audio: false}).then(stream => {
+        this.forceUpdate();
+      })
     })
   }
 

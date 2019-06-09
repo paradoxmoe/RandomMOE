@@ -127,7 +127,23 @@ class App extends Component {
   this.setState({inConvo: true});
   
     peer.on("error", (err) => {
-      this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"Simple-Peer error has occured. Check JS console."}]});
+      switch (err)  {
+        case "Error: InvalidStateError: Failed to set remote answer sdp: Called in wrong state: kStable": {
+          this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"kStable error. Usually due to pressing 'NEXT' too much. Try clicking next!"}]});
+          break;
+        }
+
+        case "Error: Ice connection failed.": {
+          this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"Ice Connection error. Usually due to poor internet connection between both users. Try clicking next!"}]});
+          break;
+        }
+
+        default: {
+          this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"Unknown error. Try refreshing the page if errors persist."}]});
+          break;
+        } 
+      }
+      
       console.log(err);
     })
 

@@ -20,7 +20,7 @@ div {
 */
 
 #overlay {
-  position: absolute;
+  position: relative;
   width: 100%; 
   height: 100%; 
   top: 0; 
@@ -36,25 +36,23 @@ div {
 
 #overlayone {
   color: white;
-  animation-name: fadeInScrollIn;
-  animation-duration: 2s;
+  animation: fadeInScrollIn 2s;
+
 }
 
 #overlaytwo {
   color: white;
-  animation-name: fadeInScrollIn;
-  animation-duration: 2.5s;
+  animation: fadeInScrollIn 3s;
 }
 
 #overlaythree {
   color: white;
-  animation-name: fadeInScrollIn;
-  animation-duration: 2.75s;
+  animation: fadeInScrollIn 4s;
 }
 
 @keyframes fadeInScrollIn {
-  0%   {color:black; left:-500px; top:0px;}
-  100% {color:white; left:0px; top:0px;}
+  0%   {color:black; opacity:0; left:-500px; top:0px;}
+  100% {color:white; opacity:1; left:0px; top:0px;}
 }
 
 #chatApp {

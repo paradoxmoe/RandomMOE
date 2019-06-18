@@ -17,7 +17,7 @@ class CreateMessage extends Component {
     return (
             <form onSubmit = {this.onSubmit} style = {{position: 'fixed', bottom: '0', width: '100%' }}>
                 <button type="button" onClick = {this.props.next} ref = {findUsers => {this.findUsers = findUsers}}>Next</button>
-                <input type="text" name="title" style={{flex: '10', padding: '5px', width: '80%'}} placeholder="Type Message Here..." value={this.state.content} onChange={this.onChange}></input>
+                <input type="text" name="title" style={{flex: '10', padding: '5px', width: '100%'}} placeholder="Type Message Here..." value={this.state.content} onChange={this.onChange}></input>
                 <input type="submit" value="submit" className = "btn" style={{flex: '1'}} />
             </form>
     )

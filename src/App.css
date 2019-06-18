@@ -42,12 +42,12 @@ div {
 
 #overlaytwo {
   color: white;
-  animation: fadeInScrollIn 3s;
+  animation: fadeInScrollIn 4s;
 }
 
 #overlaythree {
   color: white;
-  animation: fadeInScrollIn 4s;
+  animation: fadeInScrollIn 6s;
 }
 
 @keyframes fadeInScrollIn {

@@ -120,8 +120,8 @@ class App extends Component {
         });
       }
           navigator.mediaDevices.getUserMedia({video:true, audio: true}).then(stream => {
-          this.socketConnection(stream);
-          })
+            this.socketConnection(stream);
+          }).catch((err) => { this.socketConnection(false)})
   }
 
   //Needs to be finished
@@ -220,10 +220,9 @@ class App extends Component {
       </div>
         <div id = "chatApp" class = "disableScrollbars">
           <Chat chatMessages = {this.state.chatMessages} submit = {this.submitButton} />
-          <button type="button" onClick = {this.next} ref = {findUsers => {this.findUsers = findUsers}}>Next</button>
         </div>
         {/* <NimblePicker set='messenger' data={data} /> */}
-        <CreateMessage createMessage =  {this.createMessage} peer = {this.peer} />
+        <CreateMessage createMessage =  {this.createMessage} peer = {this.peer} next = {this.next} />
         <CanvasBackground />
       </div>
     );

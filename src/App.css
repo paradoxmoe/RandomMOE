@@ -27,11 +27,34 @@ div {
   left: 0;
   right: 0;
   bottom: 0;
- color: #FF00FF;
+ color: #FFFFFF;
  text-align: center;
-  background-color: rgba(0,0,0,0.5); 
+  background-color: rgb(0, 0, 0); 
   z-index: 2; 
   cursor: pointer; 
+}
+
+#overlayone {
+  color: white;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+}
+
+#overlaytwo {
+  color: white;
+  animation-name: fadeIn;
+  animation-duration: 2.5s;
+}
+
+#overlaythree {
+  color: white;
+  animation-name: fadeIn;
+  animation-duration: 2.75s;
+}
+
+@keyframes fadeIn {
+  0%   {color:black; left:-100px; top:0px;}
+  100% {color:white; left:0px; top:0px;}
 }
 
 #chatApp {

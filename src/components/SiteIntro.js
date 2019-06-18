@@ -29,15 +29,15 @@ class SiteIntro extends Component {
                 </div>
                
                 <div id = "overlaythree">
-                  <p>Be aware you are talking to anonymous users, <b>some of whom may have malicious intentions.</b></p>
-                  <p>While chat messages are encrypted, <b>there is no expectation of privacy when using Random.moe.</b> Please exercise caution when using this platform.</p>
+                  <p>Be aware you are talking to anonymous users, <b style= {{color: 'red'}}>some of whom may have malicious intentions.</b></p>
+                  <p>While chat messages are encrypted, <b style= {{color: 'red'}}>there is no expectation of privacy when using Random.moe.</b> Please exercise caution when using this platform.</p>
                   <p>As the site is currently under rapid development, please report bugs or suggestions <a href= "https://github.com/paradoxmoe/RandomMOE/issues">here</a>!</p>
                   <p>We use cookies/local storage to store your PGP encryption keys, so be aware of this.</p>
                   <p>If you don't have a webcam, I'd recommend using <a href="http://www.oldversion.com/windows/manycam-2-6-1">ManyCam</a> (or something similar) </p>
                   <p>If you'd like to contribute to the development of random.moe, please visit our <a href="https://www.patreon.com/randomMOE">Patreon</a>!</p>
 
                   <p>While a comprehensive privacy policy is in the works, we currently don't collect any data whatsoever on our users. We don't even have a database set up yet.</p>        
-                  <p>Random.moe is only for users over 18, with limited exceptions granted by <a href="https://twitter.com/Twitch_NotDem">me.</a> <b>Leave if not 18+</b> (or given my exclusive permission.)</p>
+                  <p>Random.moe is only for users over 18, with limited exceptions granted by <a href="https://twitter.com/Twitch_NotDem">me.</a> <b style= {{color: 'red'}}>Leave if not 18+</b> (or given my exclusive permission.)</p>
                 </div>
                 
                

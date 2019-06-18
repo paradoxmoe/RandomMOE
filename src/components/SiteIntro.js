@@ -8,7 +8,6 @@ class SiteIntro extends Component {
   } 
   
   render() {    
-
     return (
             <div id = "overlay" ref = {overlayRef => {this.overlayRef = overlayRef}} >      
                 <div id = "overlayone">

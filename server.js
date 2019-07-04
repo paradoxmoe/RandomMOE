@@ -1,40 +1,46 @@
 //npm run build on reacttest folder
+//Be sure to modify the ".env" file to fit your needs.
+//Alternatively, you can add modify the .env on the command line when starting the server
 
-//process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
+const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
 const fs = require('fs');
-var https = require('https');
 var http = require('http');
 
+dotenv.config();
+
+if(process.env.NODE_ENV === 'aws') {
+var https = require('https');
 var options = {
-    key: fs.readFileSync('/home/ubuntu/certs/sslforfree/private.key'),
-    cert: fs.readFileSync('/home/ubuntu/certs/sslforfree/certificate.crt'),
-    ca: fs.readFileSync('/home/ubuntu/certs/sslforfree/ca_bundle.crt')
+    key: fs.readFileSync(process.env.SSL_KEY),
+    cert: fs.readFileSync(process.env.SSL_CERT),
+    ca: fs.readFileSync(process.env.SSL_CA)
     }
-
-
 var server = https.createServer(options, app);
+  }
 var serverUnsecure = http.createServer(app)
 
 const io = require('socket.io')(server, {
   pingInterval: 5000,
   pingTimeout: 3000
 });
+
 const path = require('path');
 
-var port = process.env.PORT || 443;
-var portUnsecure = 80;
+var port = process.env.PORT_SECURE || 443;
+var portUnsecure = process.env.PORT_UNSECURE || 80;
 var queue = [];
 
-app.use(function (req, res, next) {
-  if(req.secure || req.header('x-forwarded-proto') == 'https') {
-    next()
-  } else {
-    res.redirect("https://" + req.headers.host + req.url );
-  }
-})
+if(process.env.NODE_ENV === 'aws') {
+  app.use(function (req, res, next) {
+    if(req.secure || req.header('x-forwarded-proto') == 'https') {
+      next()
+    } else {
+      res.redirect("https://" + req.headers.host + req.url );
+    }
+  })
+}
 
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -49,8 +55,10 @@ app.get('/.well-known/acme-challenge/:file', function(req, res) {
 })
 
 */
+if(process.env.NODE_ENV === 'aws') {
+  server.listen(port);
+}
 
-server.listen(port);
 serverUnsecure.listen(portUnsecure);
 
 io.on('connection', (socket) => {
@@ -112,4 +120,8 @@ io.on('connection', (socket) => {
  })
 });
 
-console.log("Server is listening on port: " + port + ", " + portUnsecure);
+if(process.env.NODE_ENV === 'aws') {
+  console.log("Server is listening on port(s): " + port + ", " + portUnsecure);
+} else {
+  console.log("Server is listening on port: " + portUnsecure);
+}

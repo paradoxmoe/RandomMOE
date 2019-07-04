@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 class Chat extends Component {
 
-
   render() {    
    // console.log(this.props.chatMessages);
     return (

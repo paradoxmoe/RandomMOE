@@ -132,8 +132,6 @@ class App extends Component {
   
     peer.on("error", (err) => {
       this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:  err.code + " Error. Try clicking next, or refreshing if problem persists"}]});
-      console.log(err);
-      console.log(err.code);
     })
 
     peer.on("connect", () => {
@@ -146,7 +144,6 @@ class App extends Component {
 
       if(data.isPublicKey === true) {
         sessionStorage.setItem("peerPublicKey", data.peerPublicKey);
-        console.log("Public Key Recieved!");
         this.setState({chatMessages: [{id: this.state.chatMessages.length, user: "Client", message:"You can now send messages!"}]});
 
       } else {

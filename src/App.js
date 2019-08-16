@@ -45,6 +45,7 @@ class App extends Component {
       stream: null,
       peer: null,
       inConvo: false,
+      backgroundImage: '',
     }
     
   }
@@ -67,7 +68,7 @@ class App extends Component {
   }
 
   socketConnection = (stream) => {
-    var socket = socketIOClient.connect("http://localhost");   
+    var socket = socketIOClient.connect("https://random.moe");   
     this.setState({chatMessages: [...this.state.chatMessages, {id: this.state.chatMessages.length, user: "Client", message:"Connecting to Server..."}]})
     socket.on('peer', (data) => {
       this.createPeer(data.initiator, stream);
@@ -205,13 +206,32 @@ class App extends Component {
     } 
   }
 
+  backgroundImage = () => {
+    if(this.state.backgroundImage == '') {
+      var imgUrl = prompt('Please enter Catbox/Imgur image URL: ')
+      if(typeof imgUrl == 'string') {
+        var splitContent = imgUrl.split('/');
+        if(splitContent[2] === "files.catbox.moe" || splitContent[2] === "i.imgur.com") {
+          splitContent = splitContent[3].split(".");
+          if(splitContent[1] == "jpg" || splitContent[1] == "jpeg" || splitContent[1] == "png" || splitContent[1] == "gif")  {
+              this.setState({backgroundImage: imgUrl})    
+          } else {
+              this.setState({backgroundImage: null})
+              return null;
+          }
+      }
+    }
+    }
+
+  }
+
   render() {
     return (
       <div className="App"> 
       <SiteIntro />
 
       <div id = "videoChat">
-        <div><h3 id = "logo">Random.moe</h3> <a href="https://www.patreon.com/randomMOE">Patreon</a> | <a href="https://twitter.com/Twitch_NotDem">Twitter</a> | <a href="https://twitch.tv/notdem">Twitch</a> | <a href="https://github.com/paradoxmoe/RandomMOE">Github</a></div>
+        <div><h3 id = "logo" onClick={ this.backgroundImage }>Random.moe</h3> <a target="_blank" href="https://www.patreon.com/randomMOE"><img style={{maxHeight: '30px' }} src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="I'm struggling pls"></img></a> | <a target="_blank" href="https://twitter.com/Twitch_NotDem"><img style={{maxHeight: '30px' }} src="https://img.icons8.com/color/48/000000/twitter.png" alt="Complain here lol"></img></a>| <a target="_blank" href="https://github.com/paradoxmoe/RandomMOE"><img style={{maxHeight: '30px' }} src="https://image.flaticon.com/icons/svg/25/25231.svg" alt="Complain here if u hate twitter lol"></img></a></div>
         <video ref = {clientRef => {this.clientRef = clientRef}} controls muted></video>
         <video ref = {peerRef => {this.peerRef = peerRef}} controls></video>
       </div>
@@ -220,7 +240,7 @@ class App extends Component {
         </div>
         {/* <NimblePicker set='messenger' data={data} /> */}
         <CreateMessage createMessage =  {this.createMessage} peer = {this.peer} next = {this.next} />
-        <CanvasBackground />
+        <CanvasBackground backgroundImage = { this.state.backgroundImage }/>
       </div>
     );
   }

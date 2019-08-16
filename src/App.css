@@ -19,6 +19,13 @@ div {
 }
 */
 
+#blackbackground {
+  position:relative;
+  background-color: rgb(0, 0, 0);
+  width: 300%;
+  height: 300%;  
+}
+
 #overlay {
   position: absolute;
   width: 100%; 
@@ -30,7 +37,7 @@ div {
  color: #FFFFFF;
  text-align: center;
   background-color: rgb(0, 0, 0); 
-  z-index: 2; 
+  z-index: 9999; 
   cursor: pointer; 
 }
 

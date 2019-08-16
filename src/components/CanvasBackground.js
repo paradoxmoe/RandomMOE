@@ -140,10 +140,19 @@ class CanvasBackground extends Component {
     }
 
     createCanvasBackground = () => {
-      this.canvasBackgroundFill();
-      this.stars();
-      this.sun();
-      this.water();
+      if(this.props.backgroundImage != '' && typeof this.props.backgroundImage != null) {
+        var img = new Image;
+        img.src = this.props.backgroundImage;
+        img.onload = () => {
+          this.ctx.drawImage(img, 0, 0)
+        }
+      } else {
+        this.canvasBackgroundFill();
+        this.stars();
+        this.sun();
+        this.water();
+      }
+
 
 
         //ctx.font = "30px Arial";

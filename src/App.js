@@ -218,6 +218,9 @@ class App extends Component {
               this.setState({backgroundImage: null})
               return null;
           }
+        } else {
+          this.setState({backgroundImage: null})
+          return null;
       }
     }
   }

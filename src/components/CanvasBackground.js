@@ -140,7 +140,7 @@ class CanvasBackground extends Component {
     }
 
     createCanvasBackground = () => {
-      if(this.props.backgroundImage != '' && typeof this.props.backgroundImage != null) {
+      if(this.props.backgroundImage != '' && this.props.backgroundImage != null) {
         var img = new Image;
         img.src = this.props.backgroundImage;
         img.onload = () => {

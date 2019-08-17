@@ -144,7 +144,7 @@ class CanvasBackground extends Component {
         var img = new Image;
         img.src = this.props.backgroundImage;
         img.onload = () => {
-          this.ctx.drawImage(img, 0, 0)
+          this.ctx.drawImage(img, 0, 0, this.state.width, this.state.height)
         }
       } else {
         this.canvasBackgroundFill();

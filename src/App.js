@@ -207,7 +207,6 @@ class App extends Component {
   }
 
   backgroundImage = () => {
-    if(this.state.backgroundImage == '') {
       var imgUrl = prompt('Please enter Catbox/Imgur image URL: ')
       if(typeof imgUrl == 'string') {
         var splitContent = imgUrl.split('/');
@@ -221,8 +220,6 @@ class App extends Component {
           }
       }
     }
-    }
-
   }
 
   render() {

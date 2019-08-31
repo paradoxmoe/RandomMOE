@@ -28,7 +28,7 @@ const io = require('socket.io')(serverUnsecure, {
 
 const path = require('path');
 
-//var port = process.env.PORT_SECURE || 443;
+var port = process.env.PORT_SECURE || 443;
 var portUnsecure = process.env.PORT_UNSECURE || 80;
 var queue = [];
 

@@ -46,6 +46,7 @@ class App extends Component {
       peer: null,
       inConvo: false,
       backgroundImage: '',
+      backgroundChatColor: ['#FFDAB9', '#FFD700']
     }
     
   }
@@ -65,6 +66,10 @@ class App extends Component {
   componentDidCatch(err, info) {
     console.log(err);
     console.log(info);
+  }
+
+  componentDidUpdate( ) {
+    console.log(this.state.backgroundChatColor);
   }
 
   socketConnection = (stream) => {
@@ -225,18 +230,42 @@ class App extends Component {
     }
   }
 
+  backgroundChatColor = () => {
+    var bgColorOne = prompt('Hex Color For You (No Pound Symbol): ')
+    var bgColorTwo = prompt('Hex Color For Anon (No Pound Symbol): ')
+
+    if (bgColorOne.charAt(0) === '#' || bgColorTwo.charAt(0) === '#') {
+      return null;
+    }
+
+    var hexRegExp = /^[0-9a-fA-F]+$/;
+
+    if(bgColorOne.match(hexRegExp) && bgColorTwo.match(hexRegExp)) {
+      console.log('Valid hex colors');    
+      bgColorOne = '#' + bgColorOne;
+      bgColorTwo = '#' + bgColorTwo;
+
+      this.setState({backgroundChatColor: [bgColorOne, bgColorTwo]});
+    } else {
+      console.log('Invalid Hex Colors');
+    }
+
+    return null;
+  }
+
+
   render() {
     return (
       <div className="App"> 
       <SiteIntro />
 
       <div id = "videoChat">
-        <div><h3 id = "logo" onClick={ this.backgroundImage }>Random.moe</h3> <a target="_blank" href="https://www.patreon.com/randomMOE"><img style={{maxHeight: '30px' }} src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="I'm struggling pls"></img></a> | <a target="_blank" href="https://twitter.com/Twitch_NotDem"><img style={{maxHeight: '30px' }} src="https://img.icons8.com/color/48/000000/twitter.png" alt="Complain here lol"></img></a>| <a target="_blank" href="https://github.com/paradoxmoe/RandomMOE"><img style={{maxHeight: '30px' }} src="https://image.flaticon.com/icons/svg/25/25231.svg" alt="Complain here if u hate twitter lol"></img></a></div>
+        <div><h3 id = "logo">Random.moe</h3> | <u onClick={ this.backgroundImage }>Custom Background</u> | <u onClick={ this.backgroundChatColor }>Custom Chat</u> <a target="_blank" href="https://www.patreon.com/randomMOE"><img style={{maxHeight: '30px' }} src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="I'm struggling pls"></img></a> | <a target="_blank" href="https://twitter.com/Twitch_NotDem"><img style={{maxHeight: '30px' }} src="https://img.icons8.com/color/48/000000/twitter.png" alt="Complain here lol"></img></a>| <a target="_blank" href="https://github.com/paradoxmoe/RandomMOE"><img style={{maxHeight: '30px' }} src="https://image.flaticon.com/icons/svg/25/25231.svg" alt="Complain here if u hate twitter lol"></img></a></div>
         <video ref = {clientRef => {this.clientRef = clientRef}} controls muted></video>
         <video ref = {peerRef => {this.peerRef = peerRef}} controls></video>
       </div>
         <div id = "chatApp" class = "disableScrollbars">
-          <Chat chatMessages = {this.state.chatMessages} submit = {this.submitButton} />
+          <Chat backgroundChatColor = {this.state.backgroundChatColor} chatMessages = {this.state.chatMessages} submit = {this.submitButton} />
         </div>
         {/* <NimblePicker set='messenger' data={data} /> */}
         <CreateMessage createMessage =  {this.createMessage} peer = {this.peer} next = {this.next} />

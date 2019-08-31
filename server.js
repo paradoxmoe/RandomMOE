@@ -10,6 +10,7 @@ var http = require('http');
 
 dotenv.config();
 
+
 var https = require('https');
 var options = {
     key: fs.readFileSync(process.env.SSL_KEY),
@@ -17,18 +18,20 @@ var options = {
     ca: fs.readFileSync(process.env.SSL_CA)
     }
 var server = https.createServer(options, app);
+
 var serverUnsecure = http.createServer(app)
 
-const io = require('socket.io')(server, {
+const io = require('socket.io')(serverUnsecure, {
   pingInterval: 5000,
   pingTimeout: 3000
 });
 
 const path = require('path');
 
-var port = process.env.PORT_SECURE || 443;
+//var port = process.env.PORT_SECURE || 443;
 var portUnsecure = process.env.PORT_UNSECURE || 80;
 var queue = [];
+
 
   app.use(function (req, res, next) {
     if(req.secure || req.header('x-forwarded-proto') == 'https') {
@@ -114,4 +117,4 @@ io.on('connection', (socket) => {
    io.to(socketData.socketid).emit("toInitiatorFromServer", data);
  })
 });
-  console.log("Server is listening on port(s): " + port + ", " + portUnsecure);
+  console.log("Server is listening on port(s): " + portUnsecure, port);

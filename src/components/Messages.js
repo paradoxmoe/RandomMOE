@@ -17,14 +17,18 @@ class Messages extends Component {
     constructor(props) {
         super(props)
 
+        this.state = {
+            backgroundChatColor: this.props.backgroundChatColor,
+        }
+
     }    
 
     getStyle = (user) => {
         if( user === "You" ) {
-            return {backgroundColor : '#FFDAB9', overflowY: "auto", opacity: .75 }
+            return {backgroundColor : this.state.backgroundChatColor[0], overflowY: "auto", opacity: .75 }
 
         } else {
-                return {backgroundColor : "#FFD700", overflowY: "auto", opacity: .75 }
+                return {backgroundColor : this.state.backgroundChatColor[1], overflowY: "auto", opacity: .75 }
             }
         }
     

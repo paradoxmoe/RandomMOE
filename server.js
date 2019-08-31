@@ -21,7 +21,7 @@ var server = https.createServer(options, app);
 
 var serverUnsecure = http.createServer(app)
 
-const io = require('socket.io')(serverUnsecure, {
+const io = require('socket.io')(server, {
   pingInterval: 5000,
   pingTimeout: 3000
 });

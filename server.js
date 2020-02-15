@@ -59,6 +59,8 @@ app.get('/.well-known/acme-challenge/:file', function(req, res) {
 server.listen(port);
 serverUnsecure.listen(portUnsecure);
 
+io.origins(['https://www.random.moe:433', 'https://random.moe', 'https://www.random.moe'])
+
 io.on('connection', (socket) => {
   console.log("User Connected");
   //socket.interest = socket.interest.toLowerCase();

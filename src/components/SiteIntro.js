@@ -21,7 +21,7 @@ class SiteIntro extends Component {
 
                 <div id = "overlaytwo">
                   
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/59UMqAvQoXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/QXpDMG9mMRc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                   <p>Youtube Support! Just Copy and Paste a youtube URL into the chat!</p>
                   <p>Imgur support! </p>
                   <p><a href="www.twitch.tv">Twitch</a> Support!</p>

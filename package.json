@@ -7,7 +7,7 @@
     "emoji-mart": "^2.11.1",
     "express": "^4.17.0",
     "jquery": "^3.4.0",
-    "mongoose": "^5.4.19",
+    "mongoose": "^5.7.5",
     "nes-emulator": "^1.0.11",
     "openpgp": "^4.4.10",
     "react": "^16.8.4",
